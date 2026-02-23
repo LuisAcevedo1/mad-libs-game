@@ -1,12 +1,24 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MadlibService, MadLibRequest } from './services/MadlibService';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  standalone: true,
+  imports: [CommonModule, FormsModule],  
+  templateUrl: './app.html'
 })
 export class App {
-  protected readonly title = signal('frontend');
+
+  story: string = '';
+
+  constructor(private madlibService: MadlibService) {}
+
+  generate(formData: MadLibRequest) {
+    this.madlibService.generate(formData)
+      .subscribe(response => {
+        this.story = response;
+      });
+  }
 }

@@ -7,6 +7,7 @@ import com.LAAG.madlibs.service.MadLibService;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MadLibController {
     //Es la capa que recibe peticiones HTTP, delega la lógica al Service y devuelve la respuesta.
     private final MadLibService madLibService;
